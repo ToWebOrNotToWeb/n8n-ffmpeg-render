@@ -7,9 +7,9 @@ FROM n8nio/n8n:latest
 USER root
 
 # Copy ffmpeg binary into n8n image
-COPY --from=ffmpeg /usr/bin/ffmpeg /usr/bin/ffmpeg
+COPY --from=ffmpeg /usr/local/bin/ffmpeg /usr/bin/ffmpeg
 
-# Give execute permission
+# Make sure it's executable
 RUN chmod +x /usr/bin/ffmpeg
 
 USER node
