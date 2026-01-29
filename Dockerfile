@@ -14,4 +14,6 @@ COPY --from=ffmpeg /usr/local/bin/ffmpeg /usr/bin/ffmpeg
 # Make sure it's executable
 RUN chmod +x /usr/bin/ffmpeg
 
+RUN ffmpeg -version
+
 USER node
