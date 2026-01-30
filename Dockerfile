@@ -1,4 +1,4 @@
-dockerfile n8n ffmpeg
+
 
 # ---------- Stage 1: Get ffmpeg binary ----------
 FROM jrottenberg/ffmpeg:6.0-alpine as ffmpeg
