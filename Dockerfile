@@ -6,10 +6,10 @@ FROM n8nio/n8n:latest
 
 USER root
 
-# Copy static FFmpeg binary
-COPY --from=ffmpeg /ffmpeg /usr/local/bin/ffmpeg
+# Copy static FFmpeg binary (correct path)
+COPY --from=ffmpeg /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
 
-# Ensure executable & available in PATH
+# Make it executable and available globally
 RUN chmod +x /usr/local/bin/ffmpeg \
  && ln -s /usr/local/bin/ffmpeg /usr/bin/ffmpeg
 
@@ -17,4 +17,3 @@ RUN chmod +x /usr/local/bin/ffmpeg \
 RUN ffmpeg -version
 
 USER node
-
