@@ -1,14 +1,17 @@
+dockerfile n8n ffmpeg
+
+# ---------- Stage 1: Get ffmpeg binary ----------
+FROM jrottenberg/ffmpeg:6.0-alpine as ffmpeg
+
+# ---------- Stage 2: n8n ----------
 FROM n8nio/n8n:latest
 
 USER root
 
-# Télécharger le binaire FFmpeg statique (John Van Sickle)
-RUN curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
-    | tar -xJ -C /tmp \
- && mv /tmp/ffmpeg-*-static/ffmpeg /usr/local/bin/ffmpeg \
- && chmod +x /usr/local/bin/ffmpeg
+# Copy ffmpeg binary into n8n image
+COPY --from=ffmpeg /usr/local/bin/ffmpeg /usr/bin/ffmpeg
 
-# Vérification
-RUN ffmpeg -version
+# Make sure it's executable
+RUN chmod +x /usr/bin/ffmpeg
 
 USER node
